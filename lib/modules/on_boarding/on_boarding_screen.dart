@@ -8,8 +8,10 @@ class OnBoardingScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image(
-            image: AssetImage('assets/images/shopping1.jpg'),
+          Expanded(
+            child: Image(
+              image: AssetImage('assets/images/shopping1.jpg'),
+            ),
           ),
           SizedBox(
             height: 30.0,
