@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shop_app/shared/styles/color.dart';
+
+
 
 ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: Colors.black,
-  primarySwatch: Colors.pink,
+  primarySwatch: defualtColor,
   appBarTheme: AppBarTheme(
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
@@ -37,7 +40,7 @@ ThemeData darkTheme = ThemeData(
   ),
 );
 ThemeData lightTheme = ThemeData(
-  primarySwatch: Colors.pink,
+  primarySwatch: defualtColor,
   appBarTheme: AppBarTheme(
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(

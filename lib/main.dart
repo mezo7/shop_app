@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'Shop App',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode
-          .system, //NewsCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
+      themeMode: ThemeMode.system,
+      //NewsCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
       home: OnBoardingScreen(),
     );
