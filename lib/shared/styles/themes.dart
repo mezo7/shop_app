@@ -38,6 +38,7 @@ ThemeData darkTheme = ThemeData(
       color: Colors.white,
     ),
   ),
+
 );
 ThemeData lightTheme = ThemeData(
   primarySwatch: defualtColor,

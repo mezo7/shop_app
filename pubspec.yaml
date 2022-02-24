@@ -32,6 +32,12 @@ dependencies:
   cupertino_icons:
   smooth_page_indicator:
   conditional_builder_null_safety:
+  flutter_bloc:
+  intl:
+  bloc:
+  dio:
+  hexcolor:
+  shared_preferences:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

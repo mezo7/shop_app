@@ -83,8 +83,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   effect: ExpandingDotsEffect(
                     dotColor: Colors.grey,
                     activeDotColor: defualtColor,
-                    dotHeight: 15.0,
-                    expansionFactor: 4,
+                    dotHeight: 12.0,
+                    expansionFactor: 5,
                     spacing: 5,
                   ),
                 ),

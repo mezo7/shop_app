@@ -1,15 +1,15 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-
+import 'package:shop_app/shared/styles/color.dart';
 
 Widget myDivaider() => Padding(
-  padding: const EdgeInsetsDirectional.only(start: 20.0),
-  child: Container(
-    width: double.infinity,
-    height: 2.0,
-    color: Colors.grey[300],
-  ),
-);
+      padding: const EdgeInsetsDirectional.only(start: 20.0),
+      child: Container(
+        width: double.infinity,
+        height: 2.0,
+        color: Colors.grey[300],
+      ),
+    );
 
 Widget defualtTextFormField({
   required controller,
@@ -22,6 +22,7 @@ Widget defualtTextFormField({
   Function? suffixPressed,
   Function()? onTap,
   ValueChanged<String>? onChange,
+  ValueChanged<String>? onSubmit,
   bool isClicked = true,
 }) =>
     TextFormField(
@@ -40,17 +41,52 @@ Widget defualtTextFormField({
       validator: validate,
       onTap: onTap,
       enabled: isClicked,
+      onFieldSubmitted: onSubmit,
     );
+
+Widget defualtButton({
+  double width = double.infinity,
+  Color background = defualtColor,
+   Function()? function,
+  required String text,
+}) =>
+    Container(
+      width: width,
+      height: 45,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(7.0),
+        color: background,
+      ),
+      child: MaterialButton(
+        child: Text(
+          text.toUpperCase(),
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed:function,
+
+      ),
+    );
+Widget defualtTextButton({
+  required Function function,
+  required String text,
+}) => TextButton(
+    onPressed: function(),
+    child: Text(
+      text.toUpperCase(),
+      style: TextStyle(
+        color: defualtColor,
+      ),
+    ));
+
 void navigateTo(context, wedgit) => Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => wedgit,
     ));
 void navigateAndFinish(context, wedgit) => Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(
-      builder: (context) => wedgit,
-    ),(Route<dynamic>route) =>false ,
-
-);
-
+      context,
+      MaterialPageRoute(
+        builder: (context) => wedgit,
+      ),
+      (Route<dynamic> route) => false,
+    );
