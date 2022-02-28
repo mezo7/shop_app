@@ -2,50 +2,45 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/shared/component/components.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 import 'package:shop_app/shared/cubit/states.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 
 class LoginScreen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
     var formKey = GlobalKey<FormState>();
     return BlocProvider(
-      create: (BuildContext context)=>ShopLoginCubit(),
-      child: BlocConsumer<ShopLoginCubit,LoginStates>(
-        listener: (context,state){
-          if(state is LoginSuccessState){
-            if(state.loginModel.status!){
+      create: (BuildContext context) => ShopLoginCubit(),
+      child: BlocConsumer<ShopLoginCubit, LoginStates>(
+        listener: (context, state) {
+          if (state is LoginSuccessState) {
+            if (state.loginModel.status!) {
               // print(state.loginModel.message);
               // print(state.loginModel.data!.token);
-              Fluttertoast.showToast(
-                  msg: state.loginModel.message!,
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0,
-              );
-            }else{
-             // print(state.loginModel.message);
-              Fluttertoast.showToast(
-                  msg: state.loginModel.message!,
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0,
-              );
+              showShortToast(
+                  text: state.loginModel.message!, state: ToastStates.SUCCESS);
+              CacheHelper.saveData(
+                      key: 'token',
+                  value: state.loginModel.data?.token,
+              ).then((value) {
+                navigateAndFinish(
+                  context,
+                  ShopLayout(),
+                );
+              });
+            } else {
+              // print(state.loginModel.message);
+              showLongToast(
+                  text: state.loginModel.message!, state: ToastStates.WARNING);
             }
           }
         },
-        builder: (context,state){
+        builder: (context, state) {
           return Scaffold(
             appBar: AppBar(),
             body: Center(
@@ -60,15 +55,17 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         Text(
                           'LOGIN',
-                          style:Theme.of(context).textTheme.headline4?.copyWith(
-                            color: Colors.black,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.headline4?.copyWith(
+                                    color: Colors.black,
+                                  ),
                         ),
                         Text(
                           'Login Now To Browse Our Offers',
-                          style:Theme.of(context).textTheme.bodyText1?.copyWith(
-                            color: Colors.grey,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyText1?.copyWith(
+                                    color: Colors.grey,
+                                  ),
                         ),
                         SizedBox(
                           height: 30.0,
@@ -76,9 +73,9 @@ class LoginScreen extends StatelessWidget {
                         defualtTextFormField(
                           controller: emailController,
                           type: TextInputType.emailAddress,
-                          validate: (value){
-                            if(value.toString().isEmpty){
-                              return'Please Enter Your Email';
+                          validate: (value) {
+                            if (value.toString().isEmpty) {
+                              return 'Please Enter Your Email';
                             }
                           },
                           label: 'Email Address',
@@ -90,13 +87,13 @@ class LoginScreen extends StatelessWidget {
                         defualtTextFormField(
                           controller: passwordController,
                           type: TextInputType.visiblePassword,
-                          validate: (value){
-                            if(value.toString().isEmpty){
-                              return'Please Enter Your Password';
+                          validate: (value) {
+                            if (value.toString().isEmpty) {
+                              return 'Please Enter Your Password';
                             }
                           },
-                          onSubmit: (value){
-                            if(formKey.currentState!.validate()) {
+                          onSubmit: (value) {
+                            if (formKey.currentState!.validate()) {
                               ShopLoginCubit.get(context).userLogin(
                                 email: emailController.text,
                                 password: passwordController.text,
@@ -107,31 +104,33 @@ class LoginScreen extends StatelessWidget {
                           label: 'Password',
                           prefixIcon: Icons.lock_outline,
                           suffixIcon: IconButton(
-                            onPressed: (){
+                            onPressed: () {
                               ShopLoginCubit.get(context).changePassVisi();
                             },
-                            icon: Icon(ShopLoginCubit.get(context).suffix,),
+                            icon: Icon(
+                              ShopLoginCubit.get(context).suffix,
+                            ),
                           ),
-                          suffixPressed: (){},
+                          suffixPressed: () {},
                         ),
                         SizedBox(
                           height: 30.0,
                         ),
                         Center(
-                           child: ConditionalBuilder(
+                          child: ConditionalBuilder(
                             condition: state is! LoginLoadingState,
-                             builder:(context)=>defualtButton(
-                               function: (){
-                                 if(formKey.currentState!.validate()) {
-                                   ShopLoginCubit.get(context).userLogin(
-                                     email: emailController.text,
-                                     password: passwordController.text,
-                                   );
-                                 }
-                                },
-                               text: 'LOGIN',
-                             ),
-                            fallback:(context)=>CircularProgressIndicator(),
+                            builder: (context) => defualtButton(
+                              function: () {
+                                if (formKey.currentState!.validate()) {
+                                  ShopLoginCubit.get(context).userLogin(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  );
+                                }
+                              },
+                              text: 'LOGIN',
+                            ),
+                            fallback: (context) => CircularProgressIndicator(),
                           ),
                         ),
                         SizedBox(
@@ -144,11 +143,10 @@ class LoginScreen extends StatelessWidget {
                               'Don\'t Have An Account? || ',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            defualtTextButton(function: (){}, text: 'Register Now'),
-
+                            defualtTextButton(
+                                function: () {}, text: 'Register Now'),
                           ],
                         ),
-
                       ],
                     ),
                   ),

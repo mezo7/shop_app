@@ -1,5 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/shared/styles/color.dart';
 
 Widget myDivaider() => Padding(
@@ -47,7 +48,7 @@ Widget defualtTextFormField({
 Widget defualtButton({
   double width = double.infinity,
   Color background = defualtColor,
-   Function()? function,
+  Function()? function,
   required String text,
 }) =>
     Container(
@@ -62,21 +63,21 @@ Widget defualtButton({
           text.toUpperCase(),
           style: TextStyle(color: Colors.white),
         ),
-        onPressed:function,
-
+        onPressed: function,
       ),
     );
 Widget defualtTextButton({
   required Function function,
   required String text,
-}) => TextButton(
-    onPressed: function(),
-    child: Text(
-      text.toUpperCase(),
-      style: TextStyle(
-        color: defualtColor,
-      ),
-    ));
+}) =>
+    TextButton(
+        onPressed: function(),
+        child: Text(
+          text.toUpperCase(),
+          style: TextStyle(
+            color: defualtColor,
+          ),
+        ));
 
 void navigateTo(context, wedgit) => Navigator.push(
     context,
@@ -90,3 +91,45 @@ void navigateAndFinish(context, wedgit) => Navigator.pushAndRemoveUntil(
       ),
       (Route<dynamic> route) => false,
     );
+void showLongToast({
+  required String text,
+  required ToastStates state,
+}) =>
+    Fluttertoast.showToast(
+      msg: text,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: ToastColor(state),
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+void showShortToast({
+  required String text,
+  required ToastStates state,
+}) =>
+    Fluttertoast.showToast(
+      msg: text,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: ToastColor(state),
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+enum ToastStates { SUCCESS, ERROR, WARNING }
+Color ToastColor(ToastStates state) {
+  Color color;
+  switch (state) {
+    case ToastStates.SUCCESS:
+      color = defualtColor;
+      break;
+    case ToastStates.WARNING:
+      color = Colors.amber;
+      break;
+    case ToastStates.ERROR:
+      color = Colors.red;
+      break;
+  }
+  return color;
+}
