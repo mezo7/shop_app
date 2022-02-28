@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/shared/component/components.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 import 'package:shop_app/shared/cubit/states.dart';
@@ -15,8 +16,35 @@ class LoginScreen extends StatelessWidget {
     var formKey = GlobalKey<FormState>();
     return BlocProvider(
       create: (BuildContext context)=>ShopLoginCubit(),
-      child: BlocConsumer<ShopLoginCubit,ShopLoginStates>(
-        listener: (context,state){},
+      child: BlocConsumer<ShopLoginCubit,LoginStates>(
+        listener: (context,state){
+          if(state is LoginSuccessState){
+            if(state.loginModel.status!){
+              // print(state.loginModel.message);
+              // print(state.loginModel.data!.token);
+              Fluttertoast.showToast(
+                  msg: state.loginModel.message!,
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 5,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+              );
+            }else{
+             // print(state.loginModel.message);
+              Fluttertoast.showToast(
+                  msg: state.loginModel.message!,
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 5,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+              );
+            }
+          }
+        },
         builder: (context,state){
           return Scaffold(
             appBar: AppBar(),
@@ -91,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Center(
                            child: ConditionalBuilder(
-                            condition: state is! ShopLoginLoadingState,
+                            condition: state is! LoginLoadingState,
                              builder:(context)=>defualtButton(
                                function: (){
                                  if(formKey.currentState!.validate()) {
