@@ -1,5 +1,5 @@
 import 'package:shop_app/models/login_model.dart';
-
+// login States
 abstract class LoginStates{
 
 }
@@ -15,3 +15,13 @@ class LoginErrorState extends LoginStates{
   LoginErrorState(this.error);
 }
 class ChangePasswordVisiState extends LoginStates{}
+
+//Home States
+
+abstract class ShopStates{}
+class HomeInitialState extends ShopStates{}
+class HomeChangeBottomNavState extends ShopStates{}
+class HomeLoadingDataState extends ShopStates{}
+class HomeSuccessDataState extends ShopStates{}
+class HomeErrorDataState extends ShopStates{}
+

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login/login_sceen.dart';
 import 'package:shop_app/modules/on_boarding/on_boarding_screen.dart';
+import 'package:shop_app/shared/cubit/cubit.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
@@ -31,14 +33,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shop App',
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
-      //NewsCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-      debugShowCheckedModeBanner: false,
-      home: startWidget,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+              create:(BuildContext context) => ShopCubit()..getHomeData(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Shop App',
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
+        //NewsCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
+        debugShowCheckedModeBanner: false,
+        home: startWidget,
+      ),
     );
   }
 }

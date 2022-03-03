@@ -21,12 +21,12 @@ ThemeData darkTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     iconTheme: IconThemeData(
-      color: Colors.pinkAccent,
+      color: defualtColor,
     ),
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: Colors.pinkAccent,
+    selectedItemColor: defualtColor,
     elevation: 40.0,
     backgroundColor: Colors.black,
     unselectedItemColor: Colors.grey,
@@ -56,13 +56,13 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     iconTheme: IconThemeData(
-      color: Colors.pinkAccent,
+      color: defualtColor,
     ),
   ),
   scaffoldBackgroundColor: Colors.white,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: Colors.pinkAccent,
+    selectedItemColor: defualtColor,
     elevation: 40.0,
   ),
   textTheme: TextTheme(
