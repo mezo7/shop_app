@@ -1,4 +1,3 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/shared/styles/color.dart';
@@ -66,6 +65,7 @@ Widget defualtButton({
         onPressed: function,
       ),
     );
+
 Widget defualtTextButton({
   required Function function,
   required String text,
@@ -84,6 +84,7 @@ void navigateTo(context, wedgit) => Navigator.push(
     MaterialPageRoute(
       builder: (context) => wedgit,
     ));
+
 void navigateAndFinish(context, wedgit) => Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
@@ -91,6 +92,7 @@ void navigateAndFinish(context, wedgit) => Navigator.pushAndRemoveUntil(
       ),
       (Route<dynamic> route) => false,
     );
+
 void showLongToast({
   required String text,
   required ToastStates state,
@@ -104,6 +106,7 @@ void showLongToast({
       textColor: Colors.white,
       fontSize: 16.0,
     );
+
 void showShortToast({
   required String text,
   required ToastStates state,
@@ -118,6 +121,7 @@ void showShortToast({
       fontSize: 16.0,
     );
 enum ToastStates { SUCCESS, ERROR, WARNING }
+
 Color ToastColor(ToastStates state) {
   Color color;
   switch (state) {

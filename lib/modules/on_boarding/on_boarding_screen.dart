@@ -38,9 +38,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         body: 'On Board 3 Body'),
   ];
   bool isLast = false;
-  void submit(){
+
+  void submit() {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
-      if(value){
+      if (value) {
         navigateAndFinish(context, LoginScreen());
       }
     });
@@ -52,7 +53,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       appBar: AppBar(
         actions: [
           TextButton(
-            onPressed:submit,
+            onPressed: submit,
             child: Text('SKIP'),
           ),
         ],

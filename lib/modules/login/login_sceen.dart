@@ -1,7 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/shared/component/components.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
@@ -25,8 +24,8 @@ class LoginScreen extends StatelessWidget {
               showShortToast(
                   text: state.loginModel.message!, state: ToastStates.SUCCESS);
               CacheHelper.saveData(
-                      key: 'token',
-                  value: state.loginModel.data?.token,
+                key: 'token',
+                value: state.loginModel.data?.token,
               ).then((value) {
                 navigateAndFinish(
                   context,

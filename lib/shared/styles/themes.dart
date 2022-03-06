@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_app/shared/styles/color.dart';
 
-
-
 ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: Colors.black,
   primarySwatch: defualtColor,
@@ -38,7 +36,6 @@ ThemeData darkTheme = ThemeData(
       color: Colors.white,
     ),
   ),
-
 );
 ThemeData lightTheme = ThemeData(
   primarySwatch: defualtColor,

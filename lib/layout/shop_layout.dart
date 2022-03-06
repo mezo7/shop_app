@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/modules/login/login_sceen.dart';
 import 'package:shop_app/modules/search/search_screen.dart';
 import 'package:shop_app/shared/component/components.dart';
 import 'package:shop_app/shared/cubit/states.dart';
-import 'package:shop_app/shared/network/local/cache_helper.dart';
 
 import '../shared/cubit/cubit.dart';
 
@@ -24,10 +22,10 @@ class ShopLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                  onPressed: (){
-                    navigateTo(context, SearchScreen());
-                  },
-                  icon: Icon(Icons.search),
+                onPressed: () {
+                  navigateTo(context, SearchScreen());
+                },
+                icon: Icon(Icons.search),
               ),
             ],
           ),
@@ -35,32 +33,28 @@ class ShopLayout extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                label: 'Home'
-              ),
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: 'Home'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.apps,
                   ),
-                  label: 'Categorise'
-              ),
+                  label: 'Categorise'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.star,
                   ),
-                  label: 'Favorites'
-              ),
+                  label: 'Favorites'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.settings,
                   ),
-                  label: 'Settings'
-              ),
+                  label: 'Settings'),
             ],
             currentIndex: cubit.currentIndex,
-            onTap: (index){
+            onTap: (index) {
               cubit.changeBottomScreen(index);
             },
           ),
