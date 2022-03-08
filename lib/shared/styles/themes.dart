@@ -5,6 +5,7 @@ import 'package:shop_app/shared/styles/color.dart';
 ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: Colors.black,
   primarySwatch: defualtColor,
+   fontFamily: 'Jannah',
   appBarTheme: AppBarTheme(
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
@@ -39,6 +40,7 @@ ThemeData darkTheme = ThemeData(
 );
 ThemeData lightTheme = ThemeData(
   primarySwatch: defualtColor,
+  fontFamily: 'Jannah',
   appBarTheme: AppBarTheme(
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
