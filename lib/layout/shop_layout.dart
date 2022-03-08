@@ -44,7 +44,7 @@ class ShopLayout extends StatelessWidget {
                   label: 'Categorise'),
               BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.star,
+                    Icons.favorite,
                   ),
                   label: 'Favorites'),
               BottomNavigationBarItem(
