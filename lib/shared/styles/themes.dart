@@ -36,7 +36,13 @@ ThemeData darkTheme = ThemeData(
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
+    bodyText2: TextStyle(
+      fontSize: 24.0,
+      fontWeight: FontWeight.w800,
+      color: Colors.white,
+    ),
   ),
+
 );
 ThemeData lightTheme = ThemeData(
   primarySwatch: defualtColor,
@@ -68,6 +74,11 @@ ThemeData lightTheme = ThemeData(
     bodyText1: TextStyle(
       fontSize: 18.0,
       fontWeight: FontWeight.w600,
+      color: Colors.black,
+    ),
+    bodyText2: TextStyle(
+      fontSize: 24.0,
+      fontWeight: FontWeight.w800,
       color: Colors.black,
     ),
   ),

@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
             appBar: AppBar(),
             body: Center(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Form(
@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                                     color: Colors.grey,
                                   ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         defualtTextFormField(
@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                           label: 'Email Address',
                           prefixIcon: Icons.email_outlined,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
                         defualtTextFormField(
@@ -112,7 +112,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           suffixPressed: () {},
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         Center(
@@ -129,10 +129,10 @@ class LoginScreen extends StatelessWidget {
                               },
                               text: 'LOGIN',
                             ),
-                            fallback: (context) => CircularProgressIndicator(),
+                            fallback: (context) => const CircularProgressIndicator(),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
                         Row(

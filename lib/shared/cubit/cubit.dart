@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/models/login_model.dart';
 import 'package:shop_app/modules/categories/categories_screen.dart';
@@ -57,7 +58,6 @@ class ShopCubit extends Cubit<ShopStates> {
   int currentIndex = 0;
   List<Widget> BottomScreens = [
     ProductsScreen(),
-    SearchScreen(),
     CategoriseScreen(),
     FavoritesScreen(),
     SettingsScreen(),
@@ -83,6 +83,22 @@ class ShopCubit extends Cubit<ShopStates> {
       emit(HomeSuccessDataState());
     }).catchError((error) {
       emit(HomeErrorDataState());
+      print('errorState');
+      print(error.toString());
+    });
+  }
+
+  CategoriesModel? catModel;
+  void getCategorise() {
+    DioHelper.getData(
+      url: GET_CATEGORISE,
+      token: token,
+    ).then((value) {
+      print('e1');
+      catModel = CategoriesModel.fromJson(value.data);
+      emit(HomeSuccessCategoriseState());
+    }).catchError((error) {
+      emit(HomeErrorCategoriesState());
       print('errorState');
       print(error.toString());
     });

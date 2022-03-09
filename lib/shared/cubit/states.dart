@@ -34,3 +34,7 @@ class HomeLoadingDataState extends ShopStates {}
 class HomeSuccessDataState extends ShopStates {}
 
 class HomeErrorDataState extends ShopStates {}
+
+class HomeSuccessCategoriseState extends ShopStates {}
+
+class HomeErrorCategoriesState extends ShopStates {}
