@@ -1,11 +1,13 @@
 
 
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/shared/component/components.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/styles/color.dart';
@@ -25,20 +27,18 @@ class ProductsScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             ),
             builder: (context) =>
-                prodBuilder(ShopCubit.get(context).homeModel!,ShopCubit.get(context).catModel!),
+                prodBuilder(ShopCubit.get(context).homeModel!,ShopCubit.get(context).catModel!,context),
           );
         });
   }
 
-  Widget prodBuilder(HomeModel model,CategoriesModel categoriesModel) => SingleChildScrollView(
+  Widget prodBuilder(HomeModel model,CategoriesModel categoriesModel, BuildContext context) => SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CarouselSlider(
-              items: model.data!.banners
-                  ?.map(
-                    (e) => Image(
+              items: model.data!.banners?.map((e) => Image(
                       image: NetworkImage('${e.image}'),
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -116,7 +116,7 @@ class ProductsScreen extends StatelessWidget {
                 children: List.generate(
                   model.data!.products!.length,
                   (index) => buildGridProd(
-                    model.data!.products![index],
+                    model.data!.products![index],context
                   ),
                 ),
               ),
@@ -124,7 +124,7 @@ class ProductsScreen extends StatelessWidget {
           ],
         ),
       );
-  Widget buildGridProd(ProductModel model) => Container(
+  Widget buildGridProd(ProductModel model,context) => Container(
         color: Colors.white,
         child: Column(
           children: [
@@ -199,11 +199,19 @@ class ProductsScreen extends StatelessWidget {
                       ),
                       const Spacer(),
                       IconButton(
-                        padding: EdgeInsets.zero,
-                          icon: const Icon(
-                              Icons.favorite_border,
+                          onPressed: (){
+                            ShopCubit.get(context).changeFavorites(model.id!,context);
+
+                          },
+                          icon:  CircleAvatar(
+                            backgroundColor:Colors.grey[200],
+                            radius: 50,
+                            child: Icon(
+                              ShopCubit.get(context).favo[model.id]! ? Icons.favorite:Icons.favorite_border,
+                              color: Colors.red,
+                            ),
                           ),
-                        onPressed: (){},
+
                       ),
 
 

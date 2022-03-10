@@ -1,3 +1,4 @@
+import 'package:shop_app/models/change_favorites_model.dart';
 import 'package:shop_app/models/login_model.dart';
 
 // login States
@@ -38,3 +39,18 @@ class HomeErrorDataState extends ShopStates {}
 class HomeSuccessCategoriseState extends ShopStates {}
 
 class HomeErrorCategoriesState extends ShopStates {}
+
+class ChangeFavErrorState extends ShopStates {}
+
+class ChangeFavSuccessState extends ShopStates {
+  final ChangeFavoritesModel model;
+
+  ChangeFavSuccessState(this.model);
+}
+class ChangeFavIconSuccessState extends ShopStates {}
+
+class GetFavoritesLoadingState extends ShopStates {}
+
+class GetFavoritesSuccessState extends ShopStates {}
+
+class GetFavoritesErrorState extends ShopStates {}

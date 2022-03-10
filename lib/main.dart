@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout.dart';
@@ -9,7 +11,10 @@ import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
 
+
+
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
@@ -41,7 +46,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => ShopCubit()..getHomeData()..getCategorise(),
+          create: (BuildContext context) => ShopCubit(context)..getHomeData()..getCategorise()..getFavorites(),
         ),
       ],
       child: MaterialApp(
