@@ -2,6 +2,7 @@ import 'package:shop_app/models/change_favorites_model.dart';
 import 'package:shop_app/models/login_model.dart';
 import 'package:shop_app/models/profile_model.dart';
 import 'package:shop_app/models/register_model.dart';
+import 'package:shop_app/shared/cubit/cubit.dart';
 
 // login States
 abstract class LoginStates {}
@@ -86,4 +87,15 @@ class GetProfileInfoSuccessState extends ShopStates {
 }
 
 class GetProfileInfoErrorState extends ShopStates {}
+
+class UpdateLoadingState extends ShopStates {}
+
+class UpdateSuccessState extends ShopStates {
+  final ProfileModel profileModel;
+
+  UpdateSuccessState(this.profileModel);
+
+}
+
+class UpdateErrorState extends ShopStates {}
 

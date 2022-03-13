@@ -207,7 +207,7 @@ class ShopCubit extends Cubit<ShopStates> {
   }
 
   ProfileModel? profileModel;
-  void getProfileInfo(){
+  void getProfileData(){
     emit(GetProfileInfoLoadingState());
     DioHelper.getData(
       url: PROFILE,
@@ -222,6 +222,35 @@ class ShopCubit extends Cubit<ShopStates> {
     });
 
   }
+
+  void updateProfileInfo({
+    required String name,
+    required String email,
+    required String phone,
+
+}){
+    emit(UpdateLoadingState());
+    DioHelper.putData(
+      url: UPDATE_PROFIlE,
+      token: token,
+      data: {
+        'name':name,
+        'email':email,
+        'phone':phone,
+      },
+    ).then((value) {
+      profileModel=ProfileModel.fromJson(value.data);
+      showShortToast(text: profileModel!.message.toString(), state: ToastStates.SUCCESS);
+      emit(UpdateSuccessState(profileModel!));
+    }).catchError((error){
+      showShortToast(text: profileModel!.message.toString(), state: ToastStates.SUCCESS);
+      emit(UpdateErrorState());
+      print(error.toString());
+    });
+
+  }
+
+
 
 }
 
