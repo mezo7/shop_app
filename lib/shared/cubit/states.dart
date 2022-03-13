@@ -1,5 +1,7 @@
 import 'package:shop_app/models/change_favorites_model.dart';
 import 'package:shop_app/models/login_model.dart';
+import 'package:shop_app/models/profile_model.dart';
+import 'package:shop_app/models/register_model.dart';
 
 // login States
 abstract class LoginStates {}
@@ -21,6 +23,26 @@ class LoginErrorState extends LoginStates {
 }
 
 class ChangePasswordVisiState extends LoginStates {}
+
+// Register States
+
+abstract class RegisterStates {}
+
+class RegisterInitialState extends RegisterStates {}
+
+class RegisterLoadingState extends RegisterStates {}
+
+class RegisterSuccessState extends RegisterStates {
+  final RegisterModel registerModel;
+  RegisterSuccessState(this.registerModel);
+}
+
+class RegisterErrorState extends RegisterStates {
+  final String error;
+  RegisterErrorState(this.error);
+}
+class ChangePasswordVisibState extends RegisterStates {}
+
 
 //Home States
 
@@ -54,3 +76,14 @@ class GetFavoritesLoadingState extends ShopStates {}
 class GetFavoritesSuccessState extends ShopStates {}
 
 class GetFavoritesErrorState extends ShopStates {}
+
+class GetProfileInfoLoadingState extends ShopStates {}
+
+class GetProfileInfoSuccessState extends ShopStates {
+  final ProfileModel profileModel;
+
+  GetProfileInfoSuccessState(this.profileModel);
+}
+
+class GetProfileInfoErrorState extends ShopStates {}
+

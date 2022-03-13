@@ -1,11 +1,15 @@
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout.dart';
+import 'package:shop_app/modules/register/register_screen.dart';
 import 'package:shop_app/shared/component/components.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
+
+import '../../shared/component/constance.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -27,6 +31,7 @@ class LoginScreen extends StatelessWidget {
                 key: 'token',
                 value: state.loginModel.data?.token,
               ).then((value) {
+                token =state.loginModel.data?.token;
                 navigateAndFinish(
                   context,
                   ShopLayout(),
@@ -55,16 +60,16 @@ class LoginScreen extends StatelessWidget {
                         Text(
                           'LOGIN',
                           style:
-                              Theme.of(context).textTheme.headline4?.copyWith(
-                                    color: Colors.black,
-                                  ),
+                          Theme.of(context).textTheme.headline4?.copyWith(
+                            color: Colors.black,
+                          ),
                         ),
                         Text(
                           'Login Now To Browse Our Offers',
                           style:
-                              Theme.of(context).textTheme.bodyText1?.copyWith(
-                                    color: Colors.grey,
-                                  ),
+                          Theme.of(context).textTheme.bodyText1?.copyWith(
+                            color: Colors.grey,
+                          ),
                         ),
                         const SizedBox(
                           height: 30.0,
@@ -142,8 +147,12 @@ class LoginScreen extends StatelessWidget {
                               'Don\'t Have An Account? || ',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            defualtTextButton(
-                                function: () {}, text: 'Register Now'),
+                            TextButton(
+                              onPressed: () {
+                                navigateTo(context, RegisterScreen(),);
+                              },
+                              child: Text('Register Now'.toUpperCase(),),
+                            ),
                           ],
                         ),
                       ],

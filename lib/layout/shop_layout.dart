@@ -7,8 +7,6 @@ import 'package:shop_app/shared/cubit/states.dart';
 import '../shared/cubit/cubit.dart';
 
 class ShopLayout extends StatelessWidget {
-  ShopLayout();
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(

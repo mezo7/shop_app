@@ -15,6 +15,8 @@ import 'package:shop_app/shared/network/remote/end_points.dart';
 
 import '../../models/change_favorites_model.dart';
 import '../../models/favorites_model.dart';
+import '../../models/profile_model.dart';
+import '../../models/register_model.dart';
 
 // Login Cubit Start
 class ShopLoginCubit extends Cubit<LoginStates> {
@@ -51,9 +53,54 @@ class ShopLoginCubit extends Cubit<LoginStates> {
     suffix = isPassword ? Icons.remove_red_eye : Icons.visibility_off_rounded;
     emit(ChangePasswordVisiState());
   }
-}
+} //Login Cubit Finsh
 
-//Login Cubit Finsh
+
+// Register Cubit Start
+
+class ShopRegisterCubit extends Cubit<RegisterStates> {
+  ShopRegisterCubit() : super(RegisterInitialState());
+
+  static ShopRegisterCubit get(context) => BlocProvider.of(context);
+  RegisterModel? registerModel;
+
+  void userRegister({
+    required String name,
+    required String email,
+    required String password,
+    required String phone,
+  }) {
+    emit(RegisterLoadingState());
+    DioHelper.postData(
+      url: REGISTER,
+      data: {
+        'name':name,
+        'email': email,
+        'password': password,
+        'phone' : phone,
+      },
+    ).then((value) {
+      registerModel = RegisterModel.fromJson(value.data);
+      emit(RegisterSuccessState(registerModel!));
+    }).catchError((e) {
+      emit(RegisterErrorState(e.toString()));
+      print(e.toString());
+    });
+  }
+
+  IconData suffix = Icons.remove_red_eye;
+  bool isPassword = true;
+
+  void changePassVisi() {
+    isPassword = !isPassword;
+    suffix = isPassword ? Icons.remove_red_eye : Icons.visibility_off_rounded;
+    emit(ChangePasswordVisibState());
+  }
+}//Register Cubit Finsh
+
+
+
+// Main Cubit Start Here
 class ShopCubit extends Cubit<ShopStates> {
   ShopCubit(context) : super(HomeInitialState());
 
@@ -158,4 +205,24 @@ class ShopCubit extends Cubit<ShopStates> {
       print(error.toString());
     });
   }
+
+  ProfileModel? profileModel;
+  void getProfileInfo(){
+    emit(GetProfileInfoLoadingState());
+    DioHelper.getData(
+      url: PROFILE,
+      token: token,
+    ).then((value) {
+      profileModel=ProfileModel.fromJson(value.data);
+      printFullText(value.data.toString());
+      emit(GetProfileInfoSuccessState(profileModel!));
+    }).catchError((error){
+      emit(GetProfileInfoErrorState());
+      print(error.toString());
+    });
+
+  }
+
 }
+
+
