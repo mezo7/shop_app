@@ -82,8 +82,10 @@ class ShopRegisterCubit extends Cubit<RegisterStates> {
       },
     ).then((value) {
       registerModel = RegisterModel.fromJson(value.data);
+      showShortToast(text: registerModel!.message.toString(), state: ToastStates.SUCCESS);
       emit(RegisterSuccessState(registerModel!));
     }).catchError((e) {
+      showShortToast(text: registerModel!.message.toString(), state: ToastStates.ERROR);
       emit(RegisterErrorState(e.toString()));
       print(e.toString());
     });
