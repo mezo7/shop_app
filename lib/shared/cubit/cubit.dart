@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/models/login_model.dart';
+import 'package:shop_app/models/search_model.dart';
 import 'package:shop_app/modules/categories/categories_screen.dart';
 import 'package:shop_app/modules/favorites/favorites_screen.dart';
 import 'package:shop_app/modules/products/prod_screen.dart';
@@ -250,8 +251,38 @@ class ShopCubit extends Cubit<ShopStates> {
 
   }
 
+} // Main Cubit Finsh Here
 
+// Search Cubit Start
+
+class SearchCubit extends Cubit<SearchStates>{
+  SearchCubit() : super(SearchInitialState());
+
+  static SearchCubit get(context)=> BlocProvider.of(context);
+
+  SearchModel? searchModel;
+  void search(String text){
+    DioHelper.postData(
+      url: SEARCH_PRODUCT,
+      data: {
+        'text':text
+      },
+      token: token,
+    ).then((value) {
+      searchModel = SearchModel.fromJson(value.data);
+      emit(SearchSuccessState());
+    }).catchError((error){
+      emit(SearchErrorState());
+      print(error);
+    });
+  }
 
 }
+
+
+
+
+
+
 
 

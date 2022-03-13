@@ -25,6 +25,8 @@ class DioHelper {
     return await dio!.get(url, queryParameters: query ?? null);
   }
 
+
+
   static Future<Response> postData({
     required String url,
     Map<String, dynamic>? query,
@@ -44,6 +46,9 @@ class DioHelper {
       data: data,
     );
   }
+
+
+
   static Future<Response> putData({
     required String url,
     Map<String, dynamic>? query,
